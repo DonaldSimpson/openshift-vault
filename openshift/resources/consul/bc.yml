@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: consul
+  labels:
+    build: consul
+spec:
+  failedBuildsHistoryLimit: 2
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: consul:latest
+  runPolicy: Serial
+  source:
+    type: Binary
+  strategy:
+    type: Docker
+  successfulBuildsHistoryLimit: 2
+  triggers: []
+

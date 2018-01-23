@@ -51,7 +51,7 @@ spec:
             weight: 100
       containers:
         - name: consul-client
-          image: "consul:0.9.1"
+          image: consul:latest
           env:
           - name: POD_IP
             valueFrom:
@@ -95,19 +95,12 @@ spec:
           - containerPort: 8443
             name: http-api
         - name: vault
-          image: "vault"
-#          env:
-#          - name: VAULT_LOCAL_CONFIG
-#            valueFrom:
-#              configMapKeyRef:
-#                name: vault
-#                key: vault-server.hcl
+          image: vault:latest
           securityContext:
             capabilities:
               add:
               - IPC_LOCK
-          command:
-          - vault
+          args:
           - server
           - "-config"
           - /vault/config
@@ -128,7 +121,7 @@ spec:
               scheme: HTTPS
 #          readinessProbe:
 #            httpGet:
-#              path: /v1/sys/health
+#              path: 'v1/sys/health?standbyok=true&standbycode=200&sealedcode=200&uninitcode=200'
 #              port: 8200
       volumes:
       - name: consul-config

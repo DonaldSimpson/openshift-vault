@@ -23,6 +23,8 @@ oc create secret generic consul \
 
 oc create -f openshift/resources/consul
 
+oc start-build consul --from-dir=./docker/centos/consul/
+
 #
 # Vault
 #
@@ -33,6 +35,8 @@ oc create secret generic consul-client \
   --from-file=ca/consul-client-key.pem
 
 oc create -f openshift/resources/vault
+
+oc start-build vault --from-dir=./docker/centos/vault
 
 #HOST=$(oc get route vault --template '{{ .spec.host }}' | sed 's/-'"$PROJECT"'*//')
 #oc patch route vault -p "{ \"spec\": { \"host\": \""$HOST"\" } }"

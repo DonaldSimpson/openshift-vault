@@ -16,16 +16,15 @@ allowedFlexVolumes: []
 defaultAddCapabilities: []
 fsGroup:
   type: MustRunAs
-  ranges:
-  - max: 1000
-    min: 1000
 priority: null
 readOnlyRootFilesystem: true
 requiredDropCapabilities:
 - KILL
 - MKNOD
+- SETUID
+- SETGID
 runAsUser:
-  type: RunAsAny
+  type: MustRunAsRange
 seLinuxContext:
   type: MustRunAs
 supplementalGroups:

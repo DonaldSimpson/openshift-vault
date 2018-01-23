@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  name: consul
+  labels:
+    app: vault
+spec:
+  lookupPolicy:
+    local: true
